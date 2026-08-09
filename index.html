@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="Portfolio Ramdani (Daniel) — Graphic Designer & AI Specialist." />
+  <title>Daniel — Graphic Designer & AI Specialist</title>
+
+  <style>
+    :root {
+      --bg: #050505;
+      --text: #f7f7f4;
+      --muted: rgba(247, 247, 244, 0.68);
+      --faint: rgba(247, 247, 244, 0.36);
+      --line: rgba(255, 255, 255, 0.15);
+      --glass: rgba(12, 12, 12, 0.48);
+      --glass-strong: rgba(7, 7, 7, 0.74);
+      --white: #ffffff;
+      --black: #050505;
+      --radius-lg: 34px;
+      --radius-md: 24px;
+      --radius-sm: 16px;
+      --section-inline: clamp(22px, 6vw, 88px);
+      --nav-h: 78px;
+      --ease: cubic-bezier(.2,.75,.2,1);
+      --shadow: 0 18px 70px rgba(0, 0, 0, .38);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body.experience-locked {
+      overflow: hidden;
+      height: 100dvh;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    ::selection {
+      color: #111;
+      background: #fff;
+    }
+
+    /* ==============================
+       BACKGROUND VIDEO
+    ============================== */
+    .video-stage {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      overflow: hidden;
+      background: #050505;
+    }
+
+    .video-stage video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0;
+      transform: scale(1.035);
+      filter: saturate(.92) contrast(1.06) brightness(.72);
+      transition: opacity 1.15s var(--ease), transform 10s linear;
+    }
+
+    body.experience-started .video-stage video {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .video-stage::before,
+    .video-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .video-stage::before {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.48) 0%, rgba(0,0,0,.12) 30%, rgba(0,0,0,.28) 68%, rgba(0,0,0,.78) 100%),
+        radial-gradient(circle at 50% 38%, transparent 0 24%, rgba(0,0,0,.16) 72%, rgba(0,0,0,.5) 100%);
+      z-index: 1;
+    }
+
+    .video-stage::after {
+      z-index: 2;
+      opacity: .13;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    /* ==============================
+       INTRO SCREEN
+    ============================== */
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: end center;
+      min-height: 100dvh;
+      overflow: hidden;
+      background: #030303;
+      transition: opacity .9s var(--ease), visibility .9s var(--ease), transform 1.15s var(--ease);
+    }
+
+    .intro.is-leaving {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.025);
+      pointer-events: none;
+    }
+
+    .intro__photo,
+    .intro__shade,
+    .intro__grain {
+      position: absolute;
+      inset: 0;
+    }
+
+    .intro__photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 38%;
+      animation: introZoom 12s linear both;
+    }
+
+    .intro__shade {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.03) 38%, rgba(0,0,0,.7) 100%),
+        radial-gradient(circle at 50% 35%, transparent 0 32%, rgba(0,0,0,.24) 75%, rgba(0,0,0,.52) 100%);
+    }
+
+    .intro__grain {
+      opacity: .18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.38'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .intro__content {
+      position: relative;
+      z-index: 3;
+      width: min(100% - 44px, 720px);
+      padding-bottom: max(46px, calc(env(safe-area-inset-bottom) + 30px));
+      text-align: center;
+    }
+
+    .intro__eyebrow {
+      margin: 0 0 10px;
+      color: rgba(255,255,255,.58);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+    }
+
+    .intro__title {
+      margin: 0;
+      font-size: clamp(42px, 11vw, 88px);
+      line-height: .88;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+    }
+
+    .intro__title span {
+      display: block;
+      font-weight: 800;
+    }
+
+    .intro__title em {
+      display: block;
+      margin-top: 7px;
+      color: rgba(255,255,255,.72);
+      font-size: .42em;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: .17em;
+    }
+
+    .intro__tagline {
+      margin: 20px 0 26px;
+      color: rgba(255,255,255,.74);
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .enter-btn {
+      width: min(100%, 520px);
+      min-height: 78px;
+      padding: 0 28px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(12,12,12,.42);
+      backdrop-filter: blur(18px) saturate(145%);
+      -webkit-backdrop-filter: blur(18px) saturate(145%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 18px 48px rgba(0,0,0,.28);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+
+    .enter-btn:active {
+      transform: scale(.98);
+    }
+
+    @keyframes introZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+
+    /* ==============================
+       NAVIGATION
+    ============================== */
+    .site-nav-wrap {
+      position: fixed;
+      z-index: 1000;
+      top: max(16px, calc(env(safe-area-inset-top) + 10px));
+      left: 50%;
+      width: min(calc(100% - 28px), 900px);
+      transform: translate(-50%, -22px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .65s .35s var(--ease), transform .65s .35s var(--ease);
+    }
+
+    body.experience-started .site-nav-wrap {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
+    }
+
+    .site-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-height: var(--nav-h);
+      padding: 8px;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scrollbar-width: none;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      background: rgba(5,5,5,.74);
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      box-shadow: 0 18px 55px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .site-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-link {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      min-width: 118px;
+      height: calc(var(--nav-h) - 16px);
+      padding: 0 22px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      transition: color .32s ease, background .32s ease, box-shadow .32s ease, transform .32s ease;
+    }
+
+    .nav-link.active {
+      color: #0b0b0b;
+      background: #fff;
+      box-shadow: 0 0 28px rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,0,0,.05);
+    }
+
+    /* ==============================
+       FLOATING LANGUAGE
+    ============================== */
+    .floating-tools {
+      position: fixed;
+      z-index: 850;
+      right: max(16px, env(safe-area-inset-right));
+      bottom: max(18px, calc(env(safe-area-inset-bottom) + 12px));
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+      transition: opacity .6s .5s var(--ease), transform .6s .5s var(--ease);
+    }
+
+    body.experience-started .floating-tools {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-width: 100px;
+      height: 68px;
+      padding: 0 18px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(20,20,20,.46);
+      backdrop-filter: blur(18px) saturate(145%);
+      -webkit-backdrop-filter: blur(18px) saturate(145%);
+      box-shadow: 0 12px 38px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .lang-btn:active {
+      transform: scale(.96);
+    }
+
+    .lang-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* ==============================
+       PAGE / SECTIONS
+    ============================== */
+    main {
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .8s .25s var(--ease), transform .8s .25s var(--ease);
+    }
+
+    body.experience-started main {
+      opacity: 1;
+      transform: none;
+    }
+
+    .section {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 100svh;
+      padding: calc(var(--nav-h) + 76px) var(--section-inline) 100px;
+      scroll-margin-top: calc(var(--nav-h) + 36px);
+    }
+
+    .section__inner {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+    }
+
+    .section__index {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 26px;
+      color: rgba(255,255,255,.42);
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+    }
+
+    .section__index::after {
+      content: "";
+      width: 48px;
+      height: 1px;
+      background: rgba(255,255,255,.26);
+    }
+
+    .display-title {
+      margin: 0;
+      max-width: 1020px;
+      font-size: clamp(52px, 9.5vw, 138px);
+      line-height: .88;
+      letter-spacing: -.06em;
+      font-weight: 300;
+    }
+
+    .display-title strong {
+      font-weight: 800;
+    }
+
+    .section-title {
+      margin: 0;
+      max-width: 900px;
+      font-size: clamp(44px, 7.2vw, 96px);
+      line-height: .98;
+      letter-spacing: -.05em;
+      font-weight: 300;
+    }
+
+    .section-title strong {
+      font-weight: 800;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 34px 0 0;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(18px, 2.3vw, 28px);
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    .copy {
+      max-width: 760px;
+      margin: 30px 0 0;
+      color: rgba(255,255,255,.78);
+      font-size: clamp(17px, 2vw, 24px);
+      line-height: 1.72;
+    }
+
+    .home-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+    }
+
+    .home-kicker {
+      margin: 0 0 20px;
+      color: rgba(255,255,255,.72);
+      font-size: clamp(16px, 2vw, 24px);
+      font-weight: 500;
+      letter-spacing: .02em;
+    }
+
+    .home-tagline {
+      margin: 24px 0 0;
+      color: #fff;
+      font-size: clamp(22px, 3vw, 38px);
+      line-height: 1.15;
+      font-weight: 650;
+      letter-spacing: -.03em;
+    }
+
+    .home-copy {
+      max-width: 650px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(16px, 1.8vw, 20px);
+      line-height: 1.7;
+    }
+
+    .primary-btn,
+    .support-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      min-height: 66px;
+      margin-top: 30px;
+      padding: 0 28px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      color: #0b0b0b;
+      background: #fff;
+      box-shadow: 0 16px 42px rgba(0,0,0,.28);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .primary-btn svg,
+    .support-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .primary-btn:hover,
+    .support-btn:hover {
+      box-shadow: 0 20px 54px rgba(0,0,0,.36), 0 0 28px rgba(255,255,255,.14);
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      padding-bottom: 6px;
+      color: rgba(255,255,255,.44);
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* ==============================
+       ABOUT
+    ============================== */
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(280px, .88fr);
+      gap: clamp(32px, 8vw, 110px);
+      align-items: end;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 10px;
+      color: var(--faint);
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .about-card {
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius-lg);
+      background: rgba(14,14,14,.34);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .about-card__label {
+      margin: 0 0 18px;
+      color: var(--faint);
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .about-card__quote {
+      margin: 0;
+      color: rgba(255,255,255,.88);
+      font-size: clamp(22px, 3vw, 36px);
+      line-height: 1.35;
+      letter-spacing: -.03em;
+    }
+
+    /* ==============================
+       SERVICES
+    ============================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 390px;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.015)),
+        rgba(10,10,10,.35);
+      backdrop-filter: blur(22px) saturate(145%);
+      -webkit-backdrop-filter: blur(22px) saturate(145%);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.06);
+      transition: transform .35s var(--ease), border-color .35s ease, background .35s ease;
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -70px;
+      bottom: -70px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      filter: blur(4px);
+      transition: transform .5s var(--ease);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,.26);
+    }
+
+    .service-card:hover::after {
+      transform: scale(1.4);
+    }
+
+    .service-card__num {
+      color: rgba(255,255,255,.28);
+      font-size: 44px;
+      font-weight: 300;
+      letter-spacing: -.04em;
+    }
+
+    .service-card h3 {
+      margin: 82px 0 18px;
+      font-size: clamp(30px, 3.2vw, 46px);
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .service-card p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      max-width: 330px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ==============================
+       WORK
+    ============================== */
+    .work-list {
+      display: grid;
+      gap: 22px;
+      margin-top: 52px;
+    }
+
+    .work-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+      gap: 0;
+      overflow: hidden;
+      min-height: 430px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius-lg);
+      background: rgba(8,8,8,.42);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      box-shadow: var(--shadow);
+    }
+
+    .work-card__visual {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,.16), transparent 22%),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,.08), transparent 27%),
+        linear-gradient(130deg, #171717, #070707 62%, #232323);
+    }
+
+    .work-card__visual::before {
+      content: "COMING SOON";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(255,255,255,.28);
+      font-size: clamp(24px, 5vw, 70px);
+      font-weight: 800;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    .work-card__visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.06) 50%, transparent 80%);
+      transform: translateX(-110%);
+      animation: placeholderSweep 5s ease-in-out infinite;
+    }
+
+    @keyframes placeholderSweep {
+      0%, 45% { transform: translateX(-110%); }
+      70%, 100% { transform: translateX(110%); }
+    }
+
+    .work-card__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px;
+    }
+
+    .work-card__meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--faint);
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .work-card h3 {
+      margin: 90px 0 16px;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+
+    .work-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .work-card__foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 30px;
+      color: rgba(255,255,255,.6);
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .work-arrow {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+    }
+
+    .work-arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ==============================
+       FAQ
+    ============================== */
+    .faq-list {
+      display: grid;
+      gap: 14px;
+      max-width: 980px;
+      margin-top: 48px;
+    }
+
+    .faq-item {
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius-md);
+      background: rgba(12,12,12,.38);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      box-shadow: 0 16px 45px rgba(0,0,0,.18);
+    }
+
+    .faq-question {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 22px;
+      align-items: center;
+      width: 100%;
+      min-height: 102px;
+      padding: 24px 28px;
+      border: 0;
+      color: #fff;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 700;
+    }
+
+    .faq-icon {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 50%;
+      transition: transform .35s var(--ease), background .35s ease;
+    }
+
+    .faq-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: rgba(255,255,255,.1);
+    }
+
+    .faq-answer-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .42s var(--ease);
+    }
+
+    .faq-item.open .faq-answer-wrap {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      margin: 0;
+      padding: 0 28px 28px;
+      max-width: 800px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* ==============================
+       CONTACT
+    ============================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .8fr);
+      gap: clamp(36px, 8vw, 120px);
+      align-items: start;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .contact-link {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) 32px;
+      gap: 16px;
+      align-items: center;
+      min-height: 86px;
+      padding: 13px 18px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 24px;
+      background: rgba(10,10,10,.32);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      transition: transform .3s var(--ease), background .3s ease, border-color .3s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateX(6px);
+      border-color: rgba(255,255,255,.25);
+      background: rgba(20,20,20,.46);
+    }
+
+    .contact-icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+
+    .contact-icon svg,
+    .contact-arrow svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .contact-info small {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--faint);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .contact-info strong {
+      display: block;
+      overflow: hidden;
+      color: rgba(255,255,255,.94);
+      font-size: clamp(14px, 1.8vw, 19px);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .contact-arrow {
+      color: rgba(255,255,255,.55);
+    }
+
+    .contact-note {
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius-lg);
+      background: rgba(10,10,10,.36);
+      backdrop-filter: blur(22px) saturate(145%);
+      -webkit-backdrop-filter: blur(22px) saturate(145%);
+    }
+
+    .contact-note p {
+      margin: 0;
+      color: rgba(255,255,255,.84);
+      font-size: clamp(25px, 3.4vw, 44px);
+      line-height: 1.25;
+      letter-spacing: -.04em;
+    }
+
+    .contact-note span {
+      display: block;
+      margin-top: 24px;
+      color: var(--faint);
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    /* ==============================
+       SUPPORT + FOOTER
+    ============================== */
+    .support-panel {
+      margin-top: 80px;
+      padding: clamp(30px, 6vw, 70px);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: clamp(28px, 5vw, 46px);
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.12), transparent 25%),
+        rgba(8,8,8,.5);
+      backdrop-filter: blur(22px) saturate(145%);
+      -webkit-backdrop-filter: blur(22px) saturate(145%);
+      box-shadow: var(--shadow);
+    }
+
+    .support-panel h3 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(38px, 6vw, 78px);
+      line-height: .98;
+      letter-spacing: -.05em;
+      font-weight: 300;
+    }
+
+    .support-panel h3 strong {
+      font-weight: 800;
+    }
+
+    .support-panel p {
+      max-width: 720px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 21px);
+      line-height: 1.7;
+    }
+
+    .support-btn[aria-disabled="true"] {
+      opacity: .72;
+      cursor: not-allowed;
+    }
+
+    footer {
+      position: relative;
+      z-index: 3;
+      padding: 0 var(--section-inline) max(110px, calc(env(safe-area-inset-bottom) + 90px));
+    }
+
+    .footer-inner {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      color: rgba(255,255,255,.38);
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    /* ==============================
+       SCROLL REVEAL
+    ============================== */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(34px);
+      filter: blur(8px);
+      transition:
+        opacity .75s var(--ease),
+        transform .85s var(--ease),
+        filter .75s var(--ease);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 1200;
+      left: 50%;
+      bottom: max(104px, calc(env(safe-area-inset-bottom) + 96px));
+      width: max-content;
+      max-width: calc(100% - 36px);
+      padding: 13px 18px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(8,8,8,.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 15px 40px rgba(0,0,0,.3);
+      opacity: 0;
+      transform: translate(-50%, 16px);
+      pointer-events: none;
+      transition: .35s var(--ease);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+    @media (max-width: 900px) {
+      :root {
+        --section-inline: clamp(22px, 6vw, 48px);
+      }
+
+      .home-grid,
+      .about-layout,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        display: none;
+      }
+
+      .about-card {
+        max-width: 700px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        min-height: 330px;
+      }
+
+      .service-card h3 {
+        margin-top: 64px;
+      }
+
+      .work-card {
+        grid-template-columns: 1fr;
+      }
+
+      .work-card__body {
+        min-height: 300px;
+      }
+
+      .work-card h3 {
+        margin-top: 54px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --nav-h: 76px;
+      }
+
+      .site-nav-wrap {
+        top: max(12px, calc(env(safe-area-inset-top) + 8px));
+        width: calc(100% - 24px);
+      }
+
+      .site-nav {
+        padding: 7px;
+      }
+
+      .nav-link {
+        min-width: 120px;
+        padding: 0 20px;
+        font-size: 11px;
+      }
+
+      .section {
+        align-items: flex-start;
+        min-height: 100svh;
+        padding-top: calc(var(--nav-h) + 86px);
+        padding-bottom: 90px;
+      }
+
+      #beranda {
+        align-items: center;
+      }
+
+      .display-title {
+        font-size: clamp(58px, 19vw, 104px);
+      }
+
+      .section-title {
+        font-size: clamp(48px, 13.8vw, 74px);
+      }
+
+      .lead,
+      .copy {
+        font-size: 18px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .stat strong {
+        font-size: clamp(34px, 11vw, 52px);
+      }
+
+      .stat span {
+        font-size: 8px;
+        letter-spacing: .14em;
+      }
+
+      .service-card {
+        min-height: 390px;
+        padding: 26px;
+      }
+
+      .service-card h3 {
+        margin-top: 88px;
+      }
+
+      .work-card {
+        min-height: unset;
+      }
+
+      .work-card__visual {
+        min-height: 330px;
+      }
+
+      .work-card__body {
+        min-height: 310px;
+        padding: 28px;
+      }
+
+      .faq-question {
+        min-height: 108px;
+        padding: 24px 22px;
+      }
+
+      .faq-answer p {
+        padding: 0 22px 24px;
+      }
+
+      .contact-note {
+        padding: 26px;
+      }
+
+      .floating-tools {
+        right: 14px;
+      }
+
+      .lang-btn {
+        min-width: 86px;
+        height: 62px;
+        padding: 0 15px;
+      }
+
+      .intro__content {
+        width: calc(100% - 32px);
+      }
+
+      .enter-btn {
+        min-height: 76px;
+      }
+    }
+
+    @media (min-width: 641px) {
+      .intro__photo {
+        object-position: center 32%;
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .enter-btn:hover {
+        background: rgba(255,255,255,.1);
+        border-color: rgba(255,255,255,.45);
+      }
+
+      .lang-btn:hover {
+        background: rgba(35,35,35,.58);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="experience-locked">
+  <!-- Fixed video background. The video is intentionally muted. -->
+  <div class="video-stage" aria-hidden="true">
+    <video id="bgVideo" muted loop playsinline preload="metadata" poster="assets/intro-photo.png">
+      <source src="assets/background.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Intro / gate screen: photo first, video after button click. -->
+  <section class="intro" id="intro" aria-label="Opening screen">
+    <img class="intro__photo" src="assets/intro-photo.png" alt="Daniel portrait" />
+    <div class="intro__shade"></div>
+    <div class="intro__grain"></div>
+
+    <div class="intro__content">
+      <p class="intro__eyebrow">Portfolio / 2026</p>
+      <h1 class="intro__title">
+        <span>Daniel</span>
+        <em>Ramdani</em>
+      </h1>
+      <p class="intro__tagline">Better Late Than Never</p>
+      <button class="enter-btn" id="enterBtn" type="button" data-i18n="startExperience">
+        Mulai Pengalaman
+      </button>
+    </div>
+  </section>
+
+  <!-- Floating nav -->
+  <header class="site-nav-wrap">
+    <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+      <a class="nav-link active" href="#beranda" data-section="beranda" data-i18n="navHome">Beranda</a>
+      <a class="nav-link" href="#tentang" data-section="tentang" data-i18n="navAbout">Tentang</a>
+      <a class="nav-link" href="#layanan" data-section="layanan" data-i18n="navServices">Layanan</a>
+      <a class="nav-link" href="#karya" data-section="karya" data-i18n="navWork">Karya</a>
+      <a class="nav-link" href="#faq" data-section="faq">FAQ</a>
+      <a class="nav-link" href="#kontak" data-section="kontak" data-i18n="navContact">Kontak</a>
+    </nav>
+  </header>
+
+  <!-- Language only. No audio control by design. -->
+  <div class="floating-tools">
+    <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M3 12h18M12 3c2.2 2.4 3.3 5.4 3.3 9S14.2 18.6 12 21c-2.2-2.4-3.3-5.4-3.3-9S9.8 5.4 12 3Z"></path>
+      </svg>
+      <span id="langLabel">ID</span>
+    </button>
+  </div>
+
+  <main>
+    <!-- BERANDA -->
+    <section class="section" id="beranda" data-nav="beranda">
+      <div class="section__inner">
+        <div class="home-grid">
+          <div>
+            <div class="section__index" data-reveal>01 // <span data-i18n="indexHome">Beranda</span></div>
+            <p class="home-kicker" data-reveal style="--delay: 80ms">Graphic Designer & AI Specialist</p>
+            <h2 class="display-title" data-reveal style="--delay: 130ms">
+              RAMDANI<br><strong>DANIEL.</strong>
+            </h2>
+            <p class="home-tagline" data-reveal style="--delay: 190ms">Better Late Than Never.</p>
+            <p class="home-copy" data-reveal style="--delay: 240ms" data-i18n="homeCopy">
+              Saya menggabungkan desain visual, teknologi, dan AI untuk menciptakan karya yang tidak hanya menarik secara visual, tetapi juga jelas, fungsional, dan relevan.
+            </p>
+            <a class="primary-btn" href="#karya" data-magnetic data-reveal style="--delay: 290ms">
+              <span data-i18n="viewWork">Lihat Karya</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6"></path>
+              </svg>
+            </a>
+          </div>
+          <div class="hero-side" aria-hidden="true">Scroll to explore / Daniel Portfolio / 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section class="section" id="tentang" data-nav="tentang">
+      <div class="section__inner">
+        <div class="about-layout">
+          <div>
+            <div class="section__index" data-reveal>02 // <span data-i18n="indexAbout">Tentang Saya</span></div>
+            <h2 class="section-title" data-reveal style="--delay: 70ms">
+              <span data-i18n="aboutTitleA">Lebih dari sekadar</span><br>
+              <strong data-i18n="aboutTitleB">Graphic Designer.</strong>
+            </h2>
+
+            <p class="copy" data-reveal style="--delay: 140ms" data-i18n="aboutCopy1">
+              Saya Ramdani, atau Daniel. Saya bekerja di persimpangan antara desain, teknologi, dan Artificial Intelligence. Bagi saya, desain bukan sekadar membuat sesuatu terlihat bagus. Desain harus menyampaikan pesan, membangun identitas, dan menyelesaikan masalah.
+            </p>
+            <p class="copy" data-reveal style="--delay: 200ms" data-i18n="aboutCopy2">
+              Saya terus mengeksplorasi bagaimana AI dapat mempercepat proses kreatif tanpa menghilangkan keputusan manusia di balik hasil akhirnya.
+            </p>
+
+            <div class="stats" data-reveal style="--delay: 250ms">
+              <div class="stat">
+                <strong>—</strong>
+                <span data-i18n="statsProjects">Projects</span>
+              </div>
+              <div class="stat">
+                <strong>—</strong>
+                <span data-i18n="statsClients">Clients</span>
+              </div>
+              <div class="stat">
+                <strong>—</strong>
+                <span data-i18n="statsYears">Years Exp.</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="about-card" data-reveal style="--delay: 180ms">
+            <p class="about-card__label" data-i18n="principle">Prinsip Kerja</p>
+            <p class="about-card__quote" data-i18n="principleCopy">
+              “Teknologi mempercepat proses. Keputusan kreatif tetap menentukan kualitas.”
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAYANAN -->
+    <section class="section" id="layanan" data-nav="layanan">
+      <div class="section__inner">
+        <div class="section__index" data-reveal>03 // <span data-i18n="indexServices">Layanan</span></div>
+        <h2 class="section-title" data-reveal style="--delay: 70ms">
+          <span data-i18n="servicesTitleA">Apa yang</span> <strong data-i18n="servicesTitleB">bisa saya lakukan.</strong>
+        </h2>
+
+        <div class="services-grid">
+          <article class="service-card" data-reveal style="--delay: 100ms">
+            <div class="service-card__num">01</div>
+            <h3 data-i18n="service1Title">Desain Logo</h3>
+            <p data-i18n="service1Copy">Identitas visual yang dirancang untuk membuat brand lebih jelas, mudah dikenali, dan relevan dengan target audiensnya.</p>
+          </article>
+
+          <article class="service-card" data-reveal style="--delay: 170ms">
+            <div class="service-card__num">02</div>
+            <h3 data-i18n="service2Title">Desain Branding</h3>
+            <p data-i18n="service2Copy">Sistem visual brand yang konsisten, mulai dari arah desain, warna, tipografi, hingga penerapannya pada berbagai media.</p>
+          </article>
+
+          <article class="service-card" data-reveal style="--delay: 240ms">
+            <div class="service-card__num">03</div>
+            <h3 data-i18n="service3Title">Website Generate</h3>
+            <p data-i18n="service3Copy">Website modern yang dikembangkan dengan workflow berbasis AI untuk mempercepat proses tanpa mengorbankan fungsi dan tampilan.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- KARYA -->
+    <section class="section" id="karya" data-nav="karya">
+      <div class="section__inner">
+        <div class="section__index" data-reveal>04 // <span data-i18n="indexWork">Karya Terpilih</span></div>
+        <h2 class="section-title" data-reveal style="--delay: 70ms">
+          <span data-i18n="workTitleA">Proyek</span> <strong data-i18n="workTitleB">Terbaru.</strong>
+        </h2>
+        <p class="lead" data-reveal style="--delay: 130ms" data-i18n="workIntro">
+          Area ini sudah disiapkan untuk karya finalmu. Nanti kita ganti placeholder berikut dengan gambar, kategori, deskripsi, dan tautan project asli.
+        </p>
+
+        <div class="work-list">
+          <article class="work-card" data-reveal>
+            <div class="work-card__visual"></div>
+            <div class="work-card__body">
+              <div>
+                <div class="work-card__meta"><span>Project 01</span><span>2026</span></div>
+                <h3 data-i18n="projectPlaceholder">Project Akan Datang</h3>
+                <p data-i18n="projectPlaceholderCopy">Masukkan project terbaikmu di sini. Gunakan preview visual yang kuat dan deskripsi singkat yang menjelaskan nilai pekerjaanmu.</p>
+              </div>
+              <div class="work-card__foot">
+                <span data-i18n="projectCategory">Selected Work</span>
+                <span class="work-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card" data-reveal>
+            <div class="work-card__visual"></div>
+            <div class="work-card__body">
+              <div>
+                <div class="work-card__meta"><span>Project 02</span><span>2026</span></div>
+                <h3 data-i18n="projectPlaceholder">Project Akan Datang</h3>
+                <p data-i18n="projectPlaceholderCopy">Masukkan project terbaikmu di sini. Gunakan preview visual yang kuat dan deskripsi singkat yang menjelaskan nilai pekerjaanmu.</p>
+              </div>
+              <div class="work-card__foot">
+                <span data-i18n="projectCategory">Selected Work</span>
+                <span class="work-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" data-nav="faq">
+      <div class="section__inner">
+        <div class="section__index" data-reveal>05 // FAQ</div>
+        <h2 class="section-title" data-reveal style="--delay: 70ms">
+          <span data-i18n="faqTitleA">Pertanyaan yang sering</span><br><strong data-i18n="faqTitleB">diajukan.</strong>
+        </h2>
+
+        <div class="faq-list">
+          <article class="faq-item" data-reveal>
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span data-i18n="faq1q">Apakah Anda menerima pekerjaan freelance?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrap"><div class="faq-answer"><p data-i18n="faq1a">Ya. Saya menerima project freelance yang sesuai dengan layanan desain, branding, dan website. Hubungi saya melalui WhatsApp atau email untuk membahas kebutuhan, scope, dan timeline.</p></div></div>
+          </article>
+
+          <article class="faq-item" data-reveal>
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span data-i18n="faq2q">Berapa lama proses pengerjaan?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrap"><div class="faq-answer"><p data-i18n="faq2a">Durasi mengikuti tingkat kompleksitas project. Saya akan menentukan timeline setelah kebutuhan, output, dan jumlah revisi sudah jelas.</p></div></div>
+          </article>
+
+          <article class="faq-item" data-reveal>
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span data-i18n="faq3q">Apakah desain mendapatkan revisi?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrap"><div class="faq-answer"><p data-i18n="faq3a">Ya. Jumlah revisi disepakati sejak awal agar proses tetap terarah dan tidak mengubah scope pekerjaan di tengah project.</p></div></div>
+          </article>
+
+          <article class="faq-item" data-reveal>
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span data-i18n="faq4q">Apakah Anda bisa membuat website custom?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrap"><div class="faq-answer"><p data-i18n="faq4a">Bisa. Website disesuaikan dengan tujuan, konten, fitur, dan gaya visual yang dibutuhkan. Untuk project yang lebih kompleks, scope teknis akan dibahas lebih dulu.</p></div></div>
+          </article>
+
+          <article class="faq-item" data-reveal>
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span data-i18n="faq5q">Apakah Anda menggunakan AI dalam pengerjaan?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrap"><div class="faq-answer"><p data-i18n="faq5a">Ya. Saya menggunakan AI sebagai alat untuk riset, eksplorasi, dan mempercepat workflow. Keputusan visual, arah desain, dan quality control tetap saya tentukan secara langsung.</p></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section class="section" id="kontak" data-nav="kontak">
+      <div class="section__inner">
+        <div class="contact-grid">
+          <div>
+            <div class="section__index" data-reveal>06 // <span data-i18n="indexContact">Hubungi Saya</span></div>
+            <h2 class="section-title" data-reveal style="--delay: 70ms">
+              <span data-i18n="contactTitleA">Mari</span> <strong data-i18n="contactTitleB">Berkolaborasi.</strong>
+            </h2>
+            <p class="lead" data-reveal style="--delay: 130ms" data-i18n="contactIntro">Punya project, ide, atau ingin membangun sesuatu bersama? Hubungi saya lewat salah satu platform berikut.</p>
+
+            <div class="contact-list">
+              <a class="contact-link" href="mailto:ramdanipay1510@gmail.com" data-reveal>
+                <span class="contact-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+                </span>
+                <span class="contact-info"><small>Email</small><strong>ramdanipay1510@gmail.com</strong></span>
+                <span class="contact-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></span>
+              </a>
+
+              <a class="contact-link" href="https://wa.me/6283896010354" target="_blank" rel="noopener" data-reveal>
+                <span class="contact-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"></path><path d="M9 8.8c.6 2 2.1 3.6 4.2 4.3"></path></svg>
+                </span>
+                <span class="contact-info"><small>WhatsApp</small><strong>+62 838-9601-0354</strong></span>
+                <span class="contact-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></span>
+              </a>
+
+              <a class="contact-link" href="https://instagram.com/xdaniel04" target="_blank" rel="noopener" data-reveal>
+                <span class="contact-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>
+                </span>
+                <span class="contact-info"><small>Instagram</small><strong>@xdaniel04</strong></span>
+                <span class="contact-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></span>
+              </a>
+
+              <a class="contact-link" href="https://www.tiktok.com/@empiredesign04" target="_blank" rel="noopener" data-reveal>
+                <span class="contact-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4v9.3a4.3 4.3 0 1 1-3-4.1"></path><path d="M14 4c.7 2.3 2.1 3.7 4.5 4.2"></path></svg>
+                </span>
+                <span class="contact-info"><small>TikTok</small><strong>@empiredesign04</strong></span>
+                <span class="contact-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="contact-note" data-reveal style="--delay: 170ms">
+            <p data-i18n="contactNote">Tidak perlu pitch panjang. Jelaskan apa yang ingin kamu buat, untuk siapa, dan kapan dibutuhkan.</p>
+            <span>Daniel / Graphic Designer & AI Specialist</span>
+          </aside>
+        </div>
+
+        <!-- Support stays outside the navbar, as requested. -->
+        <div class="support-panel" id="dukungan" data-reveal>
+          <div class="section__index">07 // <span data-i18n="supportIndex">Dukungan</span></div>
+          <h3><span data-i18n="supportTitleA">Dukung perjalanan</span> <strong data-i18n="supportTitleB">berikutnya.</strong></h3>
+          <p data-i18n="supportCopy">Jika karya saya memberi manfaat atau inspirasi, kamu dapat ikut mendukung perjalanan kreatif saya. Link dukungan akan diaktifkan setelah platform pilihanmu ditentukan.</p>
+          <a class="support-btn" href="#" aria-disabled="true" id="supportBtn">
+            <span data-i18n="supportButton">Traktir Kopi</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      © <span id="year"></span> Daniel. <span data-i18n="footer">Built with intention.</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const body = document.body;
+    const intro = document.getElementById('intro');
+    const enterBtn = document.getElementById('enterBtn');
+    const bgVideo = document.getElementById('bgVideo');
+    const nav = document.getElementById('siteNav');
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    const sections = [...document.querySelectorAll('[data-nav]')];
+    const langBtn = document.getElementById('langBtn');
+    const langLabel = document.getElementById('langLabel');
+    const supportBtn = document.getElementById('supportBtn');
+    const toast = document.getElementById('toast');
+
+    let language = 'id';
+    let toastTimer;
+
+    const dictionary = {
+      id: {
+        startExperience: 'Mulai Pengalaman',
+        navHome: 'Beranda',
+        navAbout: 'Tentang',
+        navServices: 'Layanan',
+        navWork: 'Karya',
+        navContact: 'Kontak',
+        indexHome: 'Beranda',
+        homeCopy: 'Saya menggabungkan desain visual, teknologi, dan AI untuk menciptakan karya yang tidak hanya menarik secara visual, tetapi juga jelas, fungsional, dan relevan.',
+        viewWork: 'Lihat Karya',
+        indexAbout: 'Tentang Saya',
+        aboutTitleA: 'Lebih dari sekadar',
+        aboutTitleB: 'Graphic Designer.',
+        aboutCopy1: 'Saya Ramdani, atau Daniel. Saya bekerja di persimpangan antara desain, teknologi, dan Artificial Intelligence. Bagi saya, desain bukan sekadar membuat sesuatu terlihat bagus. Desain harus menyampaikan pesan, membangun identitas, dan menyelesaikan masalah.',
+        aboutCopy2: 'Saya terus mengeksplorasi bagaimana AI dapat mempercepat proses kreatif tanpa menghilangkan keputusan manusia di balik hasil akhirnya.',
+        statsProjects: 'Projects',
+        statsClients: 'Clients',
+        statsYears: 'Years Exp.',
+        principle: 'Prinsip Kerja',
+        principleCopy: '“Teknologi mempercepat proses. Keputusan kreatif tetap menentukan kualitas.”',
+        indexServices: 'Layanan',
+        servicesTitleA: 'Apa yang',
+        servicesTitleB: 'bisa saya lakukan.',
+        service1Title: 'Desain Logo',
+        service1Copy: 'Identitas visual yang dirancang untuk membuat brand lebih jelas, mudah dikenali, dan relevan dengan target audiensnya.',
+        service2Title: 'Desain Branding',
+        service2Copy: 'Sistem visual brand yang konsisten, mulai dari arah desain, warna, tipografi, hingga penerapannya pada berbagai media.',
+        service3Title: 'Website Generate',
+        service3Copy: 'Website modern yang dikembangkan dengan workflow berbasis AI untuk mempercepat proses tanpa mengorbankan fungsi dan tampilan.',
+        indexWork: 'Karya Terpilih',
+        workTitleA: 'Proyek',
+        workTitleB: 'Terbaru.',
+        workIntro: 'Area ini sudah disiapkan untuk karya finalmu. Nanti kita ganti placeholder berikut dengan gambar, kategori, deskripsi, dan tautan project asli.',
+        projectPlaceholder: 'Project Akan Datang',
+        projectPlaceholderCopy: 'Masukkan project terbaikmu di sini. Gunakan preview visual yang kuat dan deskripsi singkat yang menjelaskan nilai pekerjaanmu.',
+        projectCategory: 'Karya Terpilih',
+        faqTitleA: 'Pertanyaan yang sering',
+        faqTitleB: 'diajukan.',
+        faq1q: 'Apakah Anda menerima pekerjaan freelance?',
+        faq1a: 'Ya. Saya menerima project freelance yang sesuai dengan layanan desain, branding, dan website. Hubungi saya melalui WhatsApp atau email untuk membahas kebutuhan, scope, dan timeline.',
+        faq2q: 'Berapa lama proses pengerjaan?',
+        faq2a: 'Durasi mengikuti tingkat kompleksitas project. Saya akan menentukan timeline setelah kebutuhan, output, dan jumlah revisi sudah jelas.',
+        faq3q: 'Apakah desain mendapatkan revisi?',
+        faq3a: 'Ya. Jumlah revisi disepakati sejak awal agar proses tetap terarah dan tidak mengubah scope pekerjaan di tengah project.',
+        faq4q: 'Apakah Anda bisa membuat website custom?',
+        faq4a: 'Bisa. Website disesuaikan dengan tujuan, konten, fitur, dan gaya visual yang dibutuhkan. Untuk project yang lebih kompleks, scope teknis akan dibahas lebih dulu.',
+        faq5q: 'Apakah Anda menggunakan AI dalam pengerjaan?',
+        faq5a: 'Ya. Saya menggunakan AI sebagai alat untuk riset, eksplorasi, dan mempercepat workflow. Keputusan visual, arah desain, dan quality control tetap saya tentukan secara langsung.',
+        indexContact: 'Hubungi Saya',
+        contactTitleA: 'Mari',
+        contactTitleB: 'Berkolaborasi.',
+        contactIntro: 'Punya project, ide, atau ingin membangun sesuatu bersama? Hubungi saya lewat salah satu platform berikut.',
+        contactNote: 'Tidak perlu pitch panjang. Jelaskan apa yang ingin kamu buat, untuk siapa, dan kapan dibutuhkan.',
+        supportIndex: 'Dukungan',
+        supportTitleA: 'Dukung perjalanan',
+        supportTitleB: 'berikutnya.',
+        supportCopy: 'Jika karya saya memberi manfaat atau inspirasi, kamu dapat ikut mendukung perjalanan kreatif saya. Link dukungan akan diaktifkan setelah platform pilihanmu ditentukan.',
+        supportButton: 'Traktir Kopi',
+        supportToast: 'Link dukungan belum diisi.',
+        footer: 'Dibangun dengan tujuan yang jelas.'
+      },
+      en: {
+        startExperience: 'Start Experience',
+        navHome: 'Home',
+        navAbout: 'About',
+        navServices: 'Services',
+        navWork: 'Work',
+        navContact: 'Contact',
+        indexHome: 'Home',
+        homeCopy: 'I combine visual design, technology, and AI to create work that is not only visually strong, but also clear, functional, and relevant.',
+        viewWork: 'View Work',
+        indexAbout: 'About Me',
+        aboutTitleA: 'More than just a',
+        aboutTitleB: 'Graphic Designer.',
+        aboutCopy1: 'I am Ramdani, also known as Daniel. I work at the intersection of design, technology, and Artificial Intelligence. For me, design is not just about making something look good. It must communicate, build identity, and solve problems.',
+        aboutCopy2: 'I keep exploring how AI can accelerate the creative process without removing human judgment from the final result.',
+        statsProjects: 'Projects',
+        statsClients: 'Clients',
+        statsYears: 'Years Exp.',
+        principle: 'Work Principle',
+        principleCopy: '“Technology speeds up the process. Creative decisions still define the quality.”',
+        indexServices: 'Services',
+        servicesTitleA: 'What I can',
+        servicesTitleB: 'do for you.',
+        service1Title: 'Logo Design',
+        service1Copy: 'A visual identity designed to make your brand clearer, more recognizable, and relevant to its target audience.',
+        service2Title: 'Branding Design',
+        service2Copy: 'A consistent visual brand system covering design direction, color, typography, and applications across different media.',
+        service3Title: 'Website Generate',
+        service3Copy: 'Modern websites built with an AI-assisted workflow to accelerate development without sacrificing function or visual quality.',
+        indexWork: 'Selected Work',
+        workTitleA: 'Latest',
+        workTitleB: 'Projects.',
+        workIntro: 'This area is ready for your final work. We can replace these placeholders with real project images, categories, descriptions, and links later.',
+        projectPlaceholder: 'Project Coming Soon',
+        projectPlaceholderCopy: 'Place your strongest project here. Use a strong visual preview and a short description that explains the value of your work.',
+        projectCategory: 'Selected Work',
+        faqTitleA: 'Frequently asked',
+        faqTitleB: 'questions.',
+        faq1q: 'Do you accept freelance work?',
+        faq1a: 'Yes. I accept freelance projects that fit my design, branding, and website services. Contact me via WhatsApp or email to discuss requirements, scope, and timeline.',
+        faq2q: 'How long does a project take?',
+        faq2a: 'The duration depends on project complexity. I set the timeline after the requirements, deliverables, and revision limits are clear.',
+        faq3q: 'Do your design projects include revisions?',
+        faq3a: 'Yes. We agree on the number of revisions at the beginning so the process stays focused and the scope does not drift during the project.',
+        faq4q: 'Can you build a custom website?',
+        faq4a: 'Yes. I tailor the website to its goals, content, features, and visual direction. For more complex projects, we define the technical scope first.',
+        faq5q: 'Do you use AI in your work?',
+        faq5a: 'Yes. I use AI for research, exploration, and workflow acceleration. I still make the visual decisions, set the design direction, and perform quality control directly.',
+        indexContact: 'Contact Me',
+        contactTitleA: 'Let’s',
+        contactTitleB: 'Collaborate.',
+        contactIntro: 'Have a project, an idea, or something you want to build together? Reach me through one of the platforms below.',
+        contactNote: 'Skip the long pitch. Tell me what you want to build, who it is for, and when you need it.',
+        supportIndex: 'Support',
+        supportTitleA: 'Support the',
+        supportTitleB: 'next journey.',
+        supportCopy: 'If my work gives you value or inspiration, you can support my creative journey. The support link will be enabled once you choose the platform.',
+        supportButton: 'Buy Me a Coffee',
+        supportToast: 'Support link has not been added yet.',
+        footer: 'Built with intention.'
+      }
+    };
+
+    function applyLanguage(nextLanguage) {
+      language = nextLanguage;
+      document.documentElement.lang = language;
+      langLabel.textContent = language.toUpperCase();
+      document.querySelectorAll('[data-i18n]').forEach((element) => {
+        const key = element.dataset.i18n;
+        if (dictionary[language][key]) {
+          element.textContent = dictionary[language][key];
+        }
+      });
+      langBtn.setAttribute('aria-label', language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia');
+    }
+
+    function showToast(message) {
+      clearTimeout(toastTimer);
+      toast.textContent = message;
+      toast.classList.add('show');
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    async function startExperience() {
+      enterBtn.disabled = true;
+
+      // Keep the file permanently muted. No sound will be requested or played.
+      bgVideo.muted = true;
+      bgVideo.volume = 0;
+
+      try {
+        await bgVideo.play();
+      } catch (error) {
+        // The page still opens even if a browser temporarily refuses video playback.
+        console.warn('Video playback could not start:', error);
+      }
+
+      body.classList.add('experience-started');
+      body.classList.remove('experience-locked');
+      intro.classList.add('is-leaving');
+
+      setTimeout(() => {
+        intro.hidden = true;
+      }, 1050);
+    }
+
+    enterBtn.addEventListener('click', startExperience);
+
+    langBtn.addEventListener('click', () => {
+      applyLanguage(language === 'id' ? 'en' : 'id');
+    });
+
+    supportBtn.addEventListener('click', (event) => {
+      if (supportBtn.getAttribute('aria-disabled') === 'true') {
+        event.preventDefault();
+        showToast(dictionary[language].supportToast);
+      }
+    });
+
+    // FAQ accordion: only one answer stays open at a time.
+    document.querySelectorAll('.faq-question').forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const opening = !item.classList.contains('open');
+
+        document.querySelectorAll('.faq-item.open').forEach((openItem) => {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        if (opening) {
+          item.classList.add('open');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Scroll reveal.
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+
+    document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.observe(element));
+
+    // Active navigation state based on the section occupying the viewport.
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+      const id = visible.target.dataset.nav;
+      const activeLink = navLinks.find((link) => link.dataset.section === id);
+
+      navLinks.forEach((link) => link.classList.toggle('active', link === activeLink));
+
+      if (activeLink) {
+        activeLink.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }, {
+      threshold: [0.18, 0.3, 0.45, 0.6],
+      rootMargin: '-18% 0px -48% 0px'
+    });
+
+    sections.forEach((section) => sectionObserver.observe(section));
+
+    // Smooth nav and close the possibility of a hash jump above the fixed menu.
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Subtle magnetic effect only for desktop / fine pointers.
+    if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      document.querySelectorAll('[data-magnetic]').forEach((element) => {
+        element.addEventListener('pointermove', (event) => {
+          const rect = element.getBoundingClientRect();
+          const x = event.clientX - rect.left - rect.width / 2;
+          const y = event.clientY - rect.top - rect.height / 2;
+          element.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
+        });
+        element.addEventListener('pointerleave', () => {
+          element.style.transform = '';
+        });
+      });
+    }
+
+    // Pause video while the page is hidden to save battery/data usage.
+    document.addEventListener('visibilitychange', () => {
+      if (!body.classList.contains('experience-started')) return;
+      if (document.hidden) {
+        bgVideo.pause();
+      } else {
+        bgVideo.play().catch(() => {});
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    applyLanguage('id');
+  </script>
+</body>
+</html>
